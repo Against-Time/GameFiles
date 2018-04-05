@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AgainstTime.iml" filepath="$PROJECT_DIR$/AgainstTime.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\GameFiles\AgainstTime.iml" filepath="D:\GameFiles\AgainstTime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameFiles.iml" filepath="$PROJECT_DIR$/GameFiles.iml" />
+      <module fileurl="file://D:\GameFiles\app\app.iml" filepath="D:\GameFiles\app\app.iml" />
     </modules>
   </component>
 </project>
