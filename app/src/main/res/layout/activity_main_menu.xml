@@ -7,12 +7,50 @@
     tools:context="runnergame.againsttime.MainMenu">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/textView2"
+        android:layout_width="215dp"
+        android:layout_height="79dp"
+        android:text="Against Time!"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024" />
+
+    <LinearLayout
+        android:id="@+id/L_Main_Manu"
+        android:layout_width="210dp"
+        android:layout_height="144dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.636">
+
+        <Button
+            android:id="@+id/B_Play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Play" />
+
+        <Button
+            android:id="@+id/B_Option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Options" />
+
+        <Button
+            android:id="@+id/B_Quit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quit" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
