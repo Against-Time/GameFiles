@@ -34,11 +34,10 @@ public class Game extends AppCompatActivity
     Point EnemyPosition;
     int EnemyW;
 
-    // For Ball Movement
+    // For Enemy Movement
     boolean EnemyMovingUp;
     boolean EnemyMovingDown;
 
-    // For racket movement
 
     // Stats
     long lastFrameTime;
@@ -53,7 +52,6 @@ public class Game extends AppCompatActivity
         gameCanvas = new GameCanvas(this);
         setContentView(gameCanvas);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        // Setup the sound
 
 
         display = getWindowManager().getDefaultDisplay();
@@ -79,7 +77,6 @@ public class Game extends AppCompatActivity
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //soundPool.play(sample3, 1.0f, 1.0f, 0, 0, 1.0f);
         return super.onTouchEvent(event);
     }
 
@@ -159,20 +156,16 @@ public class Game extends AppCompatActivity
                 paint.setTextSize(45);
                 canvas.drawText("Score: " + score + "Lives: " + lives + " fps:" + fps, 20, 40, paint);
 
-                //Draw the squash racket
+                //Draw the Player
                 canvas.drawRect(PlayerPosition.x -(PlayerW / 2), PlayerPosition.y - (PlayerH / 2), PlayerPosition.x + (PlayerW / 2), PlayerPosition.y + PlayerH, paint);
 
-                //Draw the ball
+                //Draw the Enemy
                 canvas.drawRect(EnemyPosition.x, EnemyPosition.y, EnemyPosition.x + EnemyW, EnemyPosition.y + EnemyW, paint) ;
                 ourHolder.unlockCanvasAndPost(canvas);
             }
         }
 
         private void updateCourt() {
-           if ( EnemyPosition.y > ScreenW - EnemyW)
-            {
-
-            }
 
             // we hit the top of the screen
             if ( EnemyPosition.y <= 0) {
@@ -190,8 +183,6 @@ public class Game extends AppCompatActivity
             if (EnemyMovingUp) {
                 EnemyPosition.y -= 10;
             }
-
-            // Has ball hit racket?
 
 
         }
