@@ -34,9 +34,16 @@ public class Game extends AppCompatActivity
     Point EnemyPosition;
     int EnemyW;
 
+    Point ObstaclePosition;
+    int ObstacleW;
+
     // For Enemy Movement
     boolean EnemyMovingUp;
     boolean EnemyMovingDown;
+
+    //Obstacle
+    boolean ObstacleMovingUp;
+    boolean ObstacleMovingDown;
 
 
     // Stats
@@ -67,10 +74,17 @@ public class Game extends AppCompatActivity
         PlayerW = 100;
         PlayerH = 70;
 
+        //Enemy
         EnemyW = ScreenH /35;
         EnemyPosition = new Point();
         EnemyPosition.x = ScreenH /2;
         EnemyPosition.y = 1 + EnemyW;
+
+        //Obstacle
+        ObstacleW = ScreenH /30;
+        ObstaclePosition = new Point();
+        ObstaclePosition.x = ScreenH - ObstacleW;
+        ObstaclePosition.y = 1 + ObstacleW;
 
         lives = 3;
     }
@@ -116,6 +130,7 @@ public class Game extends AppCompatActivity
             ourHolder = getHolder();
             paint = new Paint();
             EnemyMovingDown = true;
+            ObstacleMovingDown = true;
         }
 
         @Override
@@ -154,34 +169,61 @@ public class Game extends AppCompatActivity
                 // Draw the background
                 paint.setColor(Color.argb(255, 255, 255, 255));
                 paint.setTextSize(45);
-                canvas.drawText("Score: " + score + "Lives: " + lives + " fps:" + fps, 20, 40, paint);
+                //canvas.drawText("Score: " + score + "Lives: " + lives + " fps:" + fps, 20, 40, paint);
 
                 //Draw the Player
                 canvas.drawRect(PlayerPosition.x -(PlayerW / 2), PlayerPosition.y - (PlayerH / 2), PlayerPosition.x + (PlayerW / 2), PlayerPosition.y + PlayerH, paint);
 
                 //Draw the Enemy
                 canvas.drawRect(EnemyPosition.x, EnemyPosition.y, EnemyPosition.x + EnemyW, EnemyPosition.y + EnemyW, paint) ;
+                canvas.drawRect(ObstaclePosition.x, ObstaclePosition.y, ObstaclePosition.x + ObstacleW, ObstaclePosition.y + ObstacleW, paint);
                 ourHolder.unlockCanvasAndPost(canvas);
             }
         }
 
         private void updateCourt() {
-
+            //Enemy
             // we hit the top of the screen
             if ( EnemyPosition.y <= 0) {
+                EnemyMovingDown = true;
+                EnemyMovingUp = false;
+                //EnemyPosition.y = 0;
+
+            }
+            if ( EnemyPosition.y >= ScreenW - EnemyW) {
                 EnemyMovingDown = false;
                 EnemyMovingUp = true;
-                EnemyPosition.y = 1;
+                //EnemyPosition.y = 0;
+
+            }
+            //Obstacle
+            if ( ObstaclePosition.y <= 0) {
+                ObstacleMovingDown = true;
+                ObstacleMovingUp = false;
+
+            }
+            if ( ObstaclePosition.y >= ScreenW - ObstacleW) {
+                ObstacleMovingDown = false;
+                ObstacleMovingUp = true;
+                //EnemyPosition.y = 0;
 
             }
 
             // Set new coordinates
             if (EnemyMovingDown) {
-                EnemyPosition.y += 10;
+                EnemyPosition.y += 5;
             }
 
             if (EnemyMovingUp) {
-                EnemyPosition.y -= 10;
+                EnemyPosition.y -= 5;
+            }
+
+            //Obstacle
+            if (ObstacleMovingDown) {
+                ObstaclePosition.y += 5;
+            }
+            if (ObstacleMovingUp) {
+                ObstaclePosition.y -= 5;
             }
 
 
