@@ -61,10 +61,11 @@ public class Game extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_game);
+
 
         gameCanvas = new GameCanvas(this);
         setContentView(gameCanvas);
+        //setContentView(R.layout.activity_game);
         //setContentView(R.layout.activity_game);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -105,7 +106,7 @@ public class Game extends AppCompatActivity
             case MotionEvent.ACTION_MOVE:
                 PlayerPosition.x = (int) event.getX();
                 break;
-            //case MotionEvent.ACTION_SCROLL:
+            //case MotionEvent.ACTION_DOWN:
                 //PlayerPosition.x +=(int) event.getX();
                // break;
         }
