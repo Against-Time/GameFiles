@@ -105,7 +105,11 @@ public class Game extends AppCompatActivity
             case MotionEvent.ACTION_MOVE:
                 PlayerPosition.x = (int) event.getX();
                 break;
+            //case MotionEvent.ACTION_SCROLL:
+                //PlayerPosition.x +=(int) event.getX();
+               // break;
         }
+        //TODO: Add Shoot function
         return true;
     }
 
