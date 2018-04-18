@@ -5,13 +5,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Switch;
 
 import java.util.Random;
 
@@ -52,12 +56,16 @@ public class Game extends AppCompatActivity
     int score;
     int lives;
 
+    //Test
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_game);
 
         gameCanvas = new GameCanvas(this);
         setContentView(gameCanvas);
+        //setContentView(R.layout.activity_game);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
@@ -68,11 +76,12 @@ public class Game extends AppCompatActivity
         ScreenW = size.y;
 
         // The game objects
-        PlayerPosition = new Point();
-        PlayerPosition.x = ScreenH -50;
-        PlayerPosition.y = ScreenW/2;
         PlayerW = 100;
         PlayerH = 70;
+        PlayerPosition = new Point();
+        PlayerPosition.x = ScreenH/2;
+        PlayerPosition.y = ScreenW-PlayerW;
+
 
         //Enemy
         EnemyW = ScreenH /35;
@@ -91,7 +100,13 @@ public class Game extends AppCompatActivity
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_MOVE:
+                PlayerPosition.x = (int) event.getX();
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -116,6 +131,7 @@ public class Game extends AppCompatActivity
         super.onResume();
         gameCanvas.resume();
     }
+
 
     private class GameCanvas extends SurfaceView implements Runnable
     {
@@ -171,11 +187,15 @@ public class Game extends AppCompatActivity
                 paint.setTextSize(45);
                 //canvas.drawText("Score: " + score + "Lives: " + lives + " fps:" + fps, 20, 40, paint);
 
+                //Player Coordinate
+                Rect Player = new Rect(PlayerPosition.x -(PlayerW / 2), PlayerPosition.y - (PlayerH / 2), PlayerPosition.x + (PlayerW / 2), PlayerPosition.y + PlayerH);
+                //Enemy Coordinate
+                Rect Enemy = new Rect(EnemyPosition.x, EnemyPosition.y, EnemyPosition.x + EnemyW, EnemyPosition.y + EnemyW);
                 //Draw the Player
-                canvas.drawRect(PlayerPosition.x -(PlayerW / 2), PlayerPosition.y - (PlayerH / 2), PlayerPosition.x + (PlayerW / 2), PlayerPosition.y + PlayerH, paint);
-
+                canvas.drawRect(Player, paint);
                 //Draw the Enemy
-                canvas.drawRect(EnemyPosition.x, EnemyPosition.y, EnemyPosition.x + EnemyW, EnemyPosition.y + EnemyW, paint) ;
+                canvas.drawRect(Enemy, paint) ;
+
                 canvas.drawRect(ObstaclePosition.x, ObstaclePosition.y, ObstaclePosition.x + ObstacleW, ObstaclePosition.y + ObstacleW, paint);
                 ourHolder.unlockCanvasAndPost(canvas);
             }
@@ -244,5 +264,7 @@ public class Game extends AppCompatActivity
             ourThread = new Thread(this);
             ourThread.start();
         }
+
+
     }
 }
